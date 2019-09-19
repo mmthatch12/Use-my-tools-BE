@@ -18,9 +18,26 @@ exports.up = function(knex) {
   })
   .createTable('user_tools', tbl => {
       tbl.increments()
+      tbl.integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      tbl.integer('tool_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('tools')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
   })
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+    .dropTableIfExists('user_tools')
+    .dropTableIfExists('tools')
+    .dropTableIfExists('users')
 };
