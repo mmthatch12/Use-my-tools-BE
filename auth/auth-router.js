@@ -1,8 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
-const generateToken = require('../config/token-generator')
-const restricted = require('./restricted-middleware')
-
+const tokenG = require('../config/token-generator')
 
 const Users = require('./auth-model')
 
@@ -34,7 +32,7 @@ router.post('/login', (req, res) => {
         .first()
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
-                const token = generateToken(user)
+                const token = tokenG.generateToken(user)
                 res.status(200).json({ message: `Welcome ${user.first_name}!`, token})
             } else {
                 res.status(401).json({ message: 'You do not have proper authorization'})
@@ -45,6 +43,7 @@ router.post('/login', (req, res) => {
             res.status(500).json(error)
         })
 })
+
 
 
 module.exports = router
