@@ -11,14 +11,18 @@ exports.up = function(knex) {
   })
   .createTable('tools', tbl => {
     tbl.increments()
-
     tbl.string('name', 128).notNullable()
-    tbl.integer('owned_by').notNullable()
-    tbl.integer('borrowed_by')
+    tbl.integer('owner_id')
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('users')
+    .onDelete('CASCADE')
+    .onUpdate('CASCADE')
   })
-  .createTable('user_tools', tbl => {
+  .createTable('borrowed_tools', tbl => {
       tbl.increments()
-      tbl.integer('user_id')
+      tbl.integer('borrower_id')
         .unsigned()
         .notNullable()
         .references('id')
@@ -37,7 +41,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists('user_tools')
+    .dropTableIfExists('borrowed_tools')
     .dropTableIfExists('tools')
     .dropTableIfExists('users')
 };

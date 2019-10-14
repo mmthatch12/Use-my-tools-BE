@@ -1,5 +1,7 @@
 exports.seed = function(knex) {
   return knex('tools').insert([
-    {name: "Hammer", owned_by: , first_name: 'Dennis', last_name: 'Baum', email: 'dbaum@gm.com'},
+    {name: "Hammer", owner_id: 1},
+    {name: "Saw", owner_id: 1},
+    {name: "Chainsaw", owner_id: 2},
   ])
 };
