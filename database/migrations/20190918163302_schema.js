@@ -12,6 +12,7 @@ exports.up = function(knex) {
   .createTable('tools', tbl => {
     tbl.increments()
     tbl.string('name', 128).notNullable()
+    tbl.boolean('borrowed').notNullable().defaultTo(false)
     tbl.integer('owner_id')
     .unsigned()
     .notNullable()

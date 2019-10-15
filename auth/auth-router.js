@@ -7,7 +7,7 @@ const Users = require('./auth-model')
 router.post('/register', (req, res) => {
     let user = req.body
 
-    const hash = bcrypt.hashSync(user.password, 8)
+    const hash = bcrypt.hashSync(user.password, 6)
     user.password = hash
 
     if(user.username && user.password && user.first_name && user.last_name && user.email){
@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
                 const token = tokenG.generateToken(user)
-                res.status(200).json({ message: `Welcome ${user.first_name}!`, token})
+                res.status(200).json({ id: user.id, first_name: user.first_name, token})
             } else {
                 res.status(401).json({ message: 'You do not have proper authorization'})
             }
