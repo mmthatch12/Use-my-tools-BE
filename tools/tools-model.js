@@ -1,19 +1,21 @@
 const db = require('../database/dbConfig')
 
 module.exports = {
-    loanedTools,
-    rentedTools,
+    getTools,
+    avTools,
     addTool,
     editTool,
     deleteTool
 }
 
-function loanedTools(id) {
-    return db('tools')
+function getTools(id) {
+    return db('tools as t')
+        .join('users as u', 't.owner_id', '=', 'u.id')
+        .where({ owner_id: id })
 }
 
-function rentedTools(id) {
-    return null
+function avTools() {
+    return db('tools').where({ borrowed: false })
 }
 
 function addTool(body) {

@@ -3,5 +3,7 @@ exports.seed = function(knex) {
     {name: "Hammer", owner_id: 1, borrowed: true},
     {name: "Saw", owner_id: 1, borrowed: true},
     {name: "Chainsaw", owner_id: 2, borrowed: true},
+    {name: "Ladder", owner_id: 3, borrowed: false},
+    {name: "Firetruck", owner_id: 3, borrowed: false},
   ])
 };
