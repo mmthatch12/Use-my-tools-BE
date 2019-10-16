@@ -29,14 +29,19 @@ router.get('/', (req, res) => {
 router.post('/addtool', (req, res) => {
     const body = req.body
 
-    Tools.addTool(body)
+    if(body.name){
+        Tools.addTool(body)
         .then(tool => {
             res.status(200).json(tool)
         })
         .catch(error => {
             console.log(error)
-            return res.status(500).json({ error: ''})
+            return res.status(500).json({ error: 'Could not add tool'})
         })
+    } else {
+        res.status(400).json({ message: 'Name is a required field'})
+    }
+
 })
 
 
