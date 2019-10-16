@@ -7,7 +7,7 @@ const restrict = require('../users/restricted-middleware')
 const AuthRouter = require('../auth/auth-router')
 const UsersRouter = require('../users/users-router')
 const ToolsRouter = require('../tools/tools-router')
-const BtoolsRouter = require('../tools/tools-router')
+const BtoolsRouter = require('../borrowed-tools/borrowed-tools-router')
 
 
 server.use(express.json())
