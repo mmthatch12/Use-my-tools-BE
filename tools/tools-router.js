@@ -62,6 +62,19 @@ router.put('/edittool/:id', (req, res) => {
     // }
 })
 
+router.delete('/edittool/:id', (req, res) => {
+    const id = req.params.id
+
+    Tools.deleteTool(id)
+        .then(tool => {
+            res.json({ removed: tool })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ err: 'Could not delete tool'})
+        })
+})
+
 
 
 module.exports = router
