@@ -20,7 +20,9 @@ function avTools() {
 }
 
 function addTool(body) {
-    return db('tools').insert(body)
+    return db('tools')
+        .insert(body)
+        .then(([tool]) => tool)
 }
 
 function editTool(id, body) {
