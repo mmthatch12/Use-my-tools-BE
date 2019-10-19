@@ -44,6 +44,24 @@ router.post('/addtool', (req, res) => {
 
 })
 
+router.put('/edittool/:id', (req, res) => {
+    const body = req.body
+    const id = req.params.id
+
+    if(body.name && body.borrowed){
+        Tools.editTool(id, body)
+            .then(tool => {
+                res.status(200).json(tool)
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(500).json({ error: 'Could not edit tool'})
+            })
+    } else {
+        res.status(400).json({ message: 'Name and borrowed are required fields'})
+    }
+})
+
 
 
 module.exports = router
