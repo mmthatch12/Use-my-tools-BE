@@ -2,7 +2,8 @@ const db = require('../database/dbConfig')
 
 module.exports = {
     getBtools,
-    addBTool
+    addBTool,
+    deleteBTool
 }
 
 function getBtools(id) {
@@ -17,4 +18,11 @@ function addBTool(body) {
     return db('borrowed_tools as b')
         .join('tools as t', 'b.tool_id', '=', 't.id')
         .insert(body)
+}
+
+function deleteBTool(id) {
+    return db('borrowed_tools as b')
+        .join('tools as t', 'b.tool_id', '=', 't.id')
+        .where({ tool_id: id})
+        .del()
 }
