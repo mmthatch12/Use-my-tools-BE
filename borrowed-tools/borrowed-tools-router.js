@@ -19,6 +19,19 @@ router.get('/:id', (req, res) => {
         })
 })
 
+router.post('/add', (req, res) => {
+    const body = req.body
+
+    Btools.addBTool(body)
+        .then(btool => {
+            res.status(201).json(btool)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ error: 'Could not add borrowed tool'})
+        })
+})
+
 
 
 
