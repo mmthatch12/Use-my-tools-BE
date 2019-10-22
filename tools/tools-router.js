@@ -75,6 +75,20 @@ router.delete('/edittool/:id', (req, res) => {
         })
 })
 
+router.get('/requested/:id', (req, res) => {
+    const { id } = req.params
+
+    Tools.reqTools(id)
+        .then(tools => {
+            res.status(200).json(tools)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Could not find requested tools'})
+        })
+
+})
+
 
 
 module.exports = router

@@ -32,18 +32,18 @@ router.post('/add', (req, res) => {
         })
 })
 
-router.delete('/delete', (req, res) => {
-    const {id} = req.params
+// router.delete('/delete', (req, res) => {
+//     const {id} = req.params
 
-    Btools.deleteBTool(id)
-        .then(btool => {
-            res.json({ removed: btool})
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ error: 'Could not delete borrowed tool'})
-        })
-})
+//     Btools.deleteBTool(id)
+//         .then(btool => {
+//             res.json({ removed: btool})
+//         })
+//         .catch(err => {
+//             console.log(err)
+//             res.status(500).json({ error: 'Could not delete borrowed tool'})
+//         })
+// })
 
 
 module.exports = router
