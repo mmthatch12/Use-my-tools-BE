@@ -48,5 +48,5 @@ function reqTools(id) {
     return db('tools as t')
         .join('users as u', 't.owner_id', '=', 'u.id')
         .where({ owner_id: id, requested: true})
-        .select('t.id', 't.owner_id', 't.name')
+        .select('t.id', 't.owner_id', 't.name', 't.requested', 't.requested_by')
 }
