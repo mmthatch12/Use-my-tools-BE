@@ -14,6 +14,7 @@ exports.up = function(knex) {
     tbl.string('name', 128).notNullable()
     tbl.boolean('borrowed').notNullable().defaultTo(false)
     tbl.boolean('requested').notNullable().defaultTo(false)
+    tbl.integer('requested_by').defaultTo(null)
     tbl.integer('owner_id')
     .unsigned()
     .notNullable()
