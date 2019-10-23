@@ -32,7 +32,7 @@ function addTool(body) {
 //edit tool by tool id
 function editTool(id, body) {
     return db('tools')
-        .where({ id })
+        .where('id', id)
         .update(body)
 }
 

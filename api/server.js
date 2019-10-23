@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const server = express()
 
@@ -11,6 +12,8 @@ const BtoolsRouter = require('../borrowed-tools/borrowed-tools-router')
 
 
 server.use(express.json())
+server.use(cors())
+
 server.use('/auth', AuthRouter)
 server.use('/users', restrict, UsersRouter)
 server.use('/tools', restrict, ToolsRouter)
