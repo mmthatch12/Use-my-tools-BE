@@ -67,7 +67,11 @@ router.delete('/edittool/:id', (req, res) => {
 
     Tools.deleteTool(id)
         .then(tool => {
-            res.json({ removed: tool })
+            if(tool){
+                res.json({ removed: tool })
+            } else {
+                res.status(400).json({ message: `Tool with id ${id} does not exist`})
+            }  
         })
         .catch(err => {
             console.log(err)
@@ -80,13 +84,12 @@ router.get('/requested/:id', (req, res) => {
 
     Tools.reqTools(id)
         .then(tools => {
-            res.status(200).json(tools)
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ message: 'Could not find requested tools'})
-        })
-
+                res.status(200).json(tools)
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json({ message: 'Could not find requested tools'})
+            })
 })
 
 
