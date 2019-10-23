@@ -26,6 +26,7 @@ function avTools() {
 function addTool(body) {
     return db('tools')
         .insert(body)
+        .returning('id')
         .then(([tool]) => tool)
 }
 
@@ -39,7 +40,7 @@ function editTool(id, body) {
 //delete tool by tool id
 function deleteTool(id) {
     return db('tools')
-        .where({ id })
+        .where('id', id)
         .del()
 }
 

@@ -22,6 +22,7 @@ function addBTool(body) {
     return db('borrowed_tools as b')
         .join('tools as t', 'b.tool_id', '=', 't.id')
         .insert(body)
+        .returning('id')
 }
 
 // function deleteBTool(id) {
