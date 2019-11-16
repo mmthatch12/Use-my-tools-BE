@@ -13,7 +13,8 @@ router.post('/register', (req, res) => {
     if(user.username && user.password && user.first_name && user.last_name && user.email){
         Users.createUser(user)
         .then(saved => {
-            res.status(201).json(saved)
+            const token = tokenG.generateToken(saved)
+            res.status(201).json({ id: saved.id, first_name: saved.first_name, token})
         })
         .catch(error => {
             console.log(error)
