@@ -19,7 +19,10 @@ function getTools(id) {
 
 //get all tools not currently borrowed
 function avTools() {
-    return db('tools').where({ borrowed: false })
+    return db('tools as t')
+        .where({ borrowed: false })
+        .join('users as u', 't.owner_id', '=', 'u.id')
+        .select('t.id', 't.name', 'u.first_name', 'u.last_name', 't.owner_id', 't.requested', 't.borrowed')
 }
 
 //add new tool
